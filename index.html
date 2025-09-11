@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Notes Homepage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --text-light: #bdc3c7;
+            --white: #ffffff;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 15px 50px rgba(0,0,0,0.15);
+            
+            --border-radius: 20px;
+            --border-radius-small: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 배경 애니메이션 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 헤더 섹션 */
+        .hero-section {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+
+        /* 가족 카드 그리드 */
+        .family-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .family-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .family-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .family-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .family-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .family-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .family-card:hover .family-avatar {
+            transform: scale(1.1);
+        }
+
+        .family-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .family-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .note-count {
+            background: var(--accent-gradient);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .family-link {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--white);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .family-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .family-link:hover::before {
+            left: 100%;
+        }
+
+        .family-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* 전체 카드 링크 스타일 */
+        .family-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .family-card-link:hover .family-card {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .family-card-link:hover .family-card::before {
+            transform: scaleX(1);
+        }
+
+        .family-card-link:hover .family-avatar {
+            transform: scale(1.1);
+        }
+
+        /* 푸터 */
+        .footer {
+            background: var(--dark-gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .footer .heart {
+            color: #ff6b6b;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-section {
+                padding: 60px 0 40px;
+            }
+            
+            
+            .family-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                gap: 30px;
+                max-width: none;
+            }
+            
+            .family-card {
+                padding: 30px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            
+            .family-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 2rem;
+            }
+            
+            .family-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 히어로 섹션 -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">🏠 Family Notes Homepage</h1>
+                <p class="hero-subtitle">A space filled with our family's precious memories and stories</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 가족 섹션 -->
+    <section class="family-section">
+        <div class="container">
+
+            <div class="family-grid">
+                <!-- 첫 번째 줄: 대현, 주원 -->
+                <a href="Daehyun/index.html" class="family-card-link">
+                    <div class="family-card">
+                        <div class="family-avatar">
+                            <img src="images/Daehyun.png" alt="Daehyun" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%;">
+                        </div>
+                        <h3 class="family-name">Daehyun</h3>
+                        <p class="family-description">Creative and imaginative works and diaries by Daehyun</p>
+                        <div class="note-count">100+ Notes</div>
+                    </div>
+                </a>
+
+                <a href="Juwon/index.html" class="family-card-link">
+                    <div class="family-card">
+                        <div class="family-avatar">
+                            <img src="images/Juwon.png" alt="Juwon" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%;">
+                        </div>
+                        <h3 class="family-name">Juwon</h3>
+                        <p class="family-description">Cute and lively drawings and daily stories by Juwon</p>
+                        <div class="note-count">90+ Notes</div>
+                    </div>
+                </a>
+
+                <!-- 두 번째 줄: 상훈, 은혜 -->
+                <a href="Sanghoon/index.html" class="family-card-link">
+                    <div class="family-card">
+                        <div class="family-avatar">
+                            <img src="images/Sanghoon.png" alt="Sanghoon" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%;">
+                        </div>
+                        <h3 class="family-name">Sanghoon</h3>
+                        <p class="family-description">Thoughtful writings and travel experiences by Sanghoon</p>
+                        <div class="note-count">24 Notes</div>
+                    </div>
+                </a>
+
+                <a href="Eunhye/index.html" class="family-card-link">
+                    <div class="family-card">
+                        <div class="family-avatar">
+                            <img src="images/Eunhye.png" alt="Eunhye" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%;">
+                        </div>
+                        <h3 class="family-name">Eunhye</h3>
+                        <p class="family-description">Artistic drawings and German studies by Eunhye</p>
+                        <div class="note-count">12 Notes</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>💝 Precious family memories from Evernote</p>
+                <p>Made with <span class="heart">❤️</span> for our family</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
