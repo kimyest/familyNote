@@ -152,24 +152,22 @@ body {
     position: absolute;
     bottom: 8px;
     right: 8px;
-    background: rgba(102, 126, 234, 0.95);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    color: #666;
+    font-size: 0.7rem;
+    font-weight: 400;
     z-index: 10;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255,255,255,0.3);
-    min-width: 50px;
-    text-align: center;
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    min-width: auto;
+    text-align: right;
 }
 
 .note-item:hover .note-date-badge {
-    background: rgba(118, 75, 162, 0.9);
-    transform: scale(1.05);
+    color: #333;
 }
 
 /* 기존 스타일 개선 */
@@ -479,3 +477,78 @@ img {
         padding: 12px;
     }
 }
+
+/* 노트 내용 안의 이미지만 크기 제한 (메뉴 아바타 제외) - 더 강력한 규칙 */
+en-note.peso img,
+en-note.peso .x3xxV,
+en-note.peso .en-media,
+en-note.peso .en-attachment,
+en-note.peso [data-type="image"],
+en-note img,
+en-note .x3xxV,
+en-note .en-media,
+en-note .en-attachment,
+en-note [data-type="image"],
+img[data-resource-hash],
+img.x3xxV {
+    max-width: 600px !important;
+    width: 600px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 20px auto !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Evernote 특정 클래스들 (노트 내용만) */
+en-note.peso .en-resource,
+en-note.peso .bZFPJ,
+en-note .en-resource,
+en-note .bZFPJ {
+    max-width: 600px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 20px auto !important;
+}
+
+en-note.peso .en-resource img,
+en-note.peso .bZFPJ img,
+en-note .en-resource img,
+en-note .bZFPJ img {
+    max-width: 600px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* 모바일에서 노트 내용 이미지 크기 조정 */
+@media (max-width: 768px) {
+    en-note.peso img,
+    en-note.peso .x3xxV,
+    en-note.peso .en-media,
+    en-note.peso .en-attachment,
+    en-note.peso [data-type="image"],
+    en-note.peso .en-resource,
+    en-note.peso .bZFPJ,
+    en-note img,
+    en-note .x3xxV,
+    en-note .en-media,
+    en-note .en-attachment,
+    en-note [data-type="image"],
+    en-note .en-resource,
+    en-note .bZFPJ {
+        max-width: 90% !important;
+        margin: 15px auto !important;
+    }
+    
+    en-note.peso .en-resource img,
+    en-note.peso .bZFPJ img,
+    en-note .en-resource img,
+    en-note .bZFPJ img {
+        max-width: 90% !important;
+        margin: 0 auto !important;
+    }
+}
+
+
+
