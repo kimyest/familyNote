@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>[작곡] 하나님 감사합니다</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // "Untitled Attachment" 요소를 찾아서 HTML5 audio 태그로 교체
+        const untitledElements = document.querySelectorAll('.kUq1e');
+        untitledElements.forEach(function(element) {
+          if (element.textContent && element.textContent.includes('Untitled Attachment')) {
+            const container = element.closest('[data-resource-hash]');
+            if (container) {
+              const audioPlayer = document.createElement('div');
+              audioPlayer.innerHTML = `
+                <audio controls style="width: 100%;">
+                  <source src="[작곡] 하나님 감사합니다 files/Evernote 20170121 215227.m4a" type="audio/mp4">
+                  Sorry, your browser does not support HTML5 audio.
+                </audio>
+              `;
+              container.replaceWith(audioPlayer);
+            }
+          }
+        });
+      });
+    </script>
+    <style>
+    /* 이미지 크기 제한 */
+    en-note img,
+    img[data-resource-hash],
+    img.x3xxV {
+        max-width: 60% !important;
+        width: 60% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 20px 0 !important;
+        text-align: left !important;
+    }
+    </style>
+  </head>
+  <body>
+    <en-note class="peso">
+      <div draggable="false" class="para">
+        <h1>[작곡] 하나님 감사합니다</h1>
+      </div>
+      <div draggable="false" class="para"><br></div>
+      <div data-resource-hash="5be7417ed86a7bf8b98001ccbd7c1646">
+        <div class="bZFPJ" data-node-reference-element="true" data-popover-update="pos=null|resourceState=undefined" data-type="audio/x-m4a" data-testid="default-file-viewer">
+          <div class="IRFZk Zr4LP" draggable="true" data-testid="default-file-header">
+            <svg viewBox="0 0 40 40" class="bOJn1"><use xlink:href="#eQ0Tt"></use></svg>
+            <div class="bu8w7 Rvw7B">
+              <div class="kUq1e">Untitled Attachment</div>
+              <div class="OIJw2 Qd4_8"><span class="IWIUl"></span></div>
+            </div>
+            <div class="mvIPE"></div>
+          </div>
+        </div>
+      </div>
+      <div draggable="false" class="para"><br></div>
+      <div data-resource-hash="img1">
+        <img src="[작곡] 하나님 감사합니다 files/IMG_5627.JPG" alt="작곡 관련 이미지">
+      </div>
+      <div data-resource-hash="img2">
+        <img src="[작곡] 하나님 감사합니다 files/IMG_5882.PNG" alt="작곡 관련 이미지">
+      </div>
+    </en-note>
+  </body>
+</html>

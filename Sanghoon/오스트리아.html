@@ -23,6 +23,25 @@ en-note.peso,en-note.peso *{box-sizing:border-box}en-note.peso{word-wrap:break-w
         text-align: left !important;
     }
     </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // 오디오 파일을 찾아서 HTML5 audio 태그로 추가
+        const audioContainer = document.createElement('div');
+        audioContainer.innerHTML = `
+          <audio controls style="width: 100%; margin: 20px 0;">
+            <source src="오스트리아 files/Evernote 20160222 124107.m4a" type="audio/mp4">
+            Sorry, your browser does not support HTML5 audio.
+          </audio>
+        `;
+        
+        // en-note 내용의 시작 부분에 오디오 플레이어 추가
+        const enNote = document.querySelector('en-note');
+        if (enNote && enNote.firstChild) {
+          enNote.insertBefore(audioContainer, enNote.firstChild);
+        }
+      });
+    </script>
   </head>
   <body>
     <en-note class="peso" style="white-space: inherit;">
